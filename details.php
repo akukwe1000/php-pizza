@@ -3,7 +3,7 @@
     // we also need to connect with our database in other to get the parameter we need 
     include('config/DBconnect.php');
 
-    // check get request id param :- here we want to get the id parameter from the url above in the browser
+    // check get request id param :- here we want to get the id parameter from the url above in the browser   -- the id in the first place is gotten throuh the index.php page where we added the more button
     if(isset($_GET['id'])){
         // first we need avoid input of malicious code using the real escape character even if we are clicking the load more button to get here users an still enter an id at the url of the broser and we want to avoid all this so we create a variable to store this operation 
         $id = mysqli_real_escape_string($conn, $_GET['id']);
@@ -29,6 +29,22 @@
         // print_r($pizza);
 
     }
+
+    // if the delete form is clicked we need t write the if statement that would take care of the total opperation 
+    if(isset($_POST['delete'])){
+        // here we are safeguarding sql injection and trying to get the value of the id from the hidden delete input form in the delete form bellow
+        // note that single quote cant be used to write sql state ment especially when using delete 
+        $idToDelete = mysqli_real_escape_string($conn, $_POST['idToDelete']);
+        $sqlToDelete = "DELETE FROM pizza WHERE id = $idToDelete";
+        if(mysqli_query($conn, $sqlToDelete)){
+            // if the above is followed correctly this is success 
+            // if this is a success we want to redirect the user to another page 
+            header('location: index.php');
+        }else{
+            // if the above is not  followed correctly this is a failure
+            echo 'query error:' . mysqli_error($conn);
+        }
+    }
 ?>
 
 
@@ -43,7 +59,16 @@
                 <p>Created by: <?php echo htmlspecialchars($pizza['email']); ?></p>
                 <p><?php echo date($pizza['created_at']); ?></p>
                 <h5>Ingridients</h5>
-                <p><?php echo htmlspecialchars($pizza['ingridients']) ?></p>
+                <p><?php echo htmlspecialchars($pizza['ingridients']); ?></p>
+
+                <!-- we are adding delete here because if there is a pizza then we can delete it  but if we add it to the else block it not making sense cus that block is for things that do not exist  -->
+                <!-- we are making use of a form for the delete system  -->
+                <form action="details.php" method='POST'>
+                    <input type="hidden" name='idToDelete' value="<?php echo $pizza['id'] ?>">
+                    <input type="submit" name='delete' value = 'Delete' class='btn brand z-depth-0'>
+                </form>
+
+    
             <?php } else{ ?>
                 <h5>no pizza of such</h5>
             <?php } ?>
