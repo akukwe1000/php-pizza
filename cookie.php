@@ -7,7 +7,7 @@ if(isset($_POST['submit'])){
     // cookie for gender 
     // the first gender there is just me giving the cookie a name and this is neccesary in the cookie generation 
     // the post[gender] is the select tag value when it is selected either male of female 
-    // and the time is when the cookie is going to expire cus coookie dont last for long  note that 86400 is the total seconds in a day that is this cookie would las for a day 
+    // and the time is when the cookie is going to expire cus coookie dont last for long  note that 86400 is the total seconds in a day that is this cookie would last for a day 
     setcookie('gender', $_POST['gender'],time() + 86400);
     // this cookie was gotten on the header.php 
 
