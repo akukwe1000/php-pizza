@@ -52,7 +52,7 @@
 <html lang="en">
 
     <?php include('templates/header.php'); ?>
-        <div class="container center">
+        <div class="container center grey-text">
             <!-- the if statement is to check if the pizza really exist  -->
             <?php if($pizza){ ?>
                 <h4><?php echo htmlspecialchars($pizza['title']); ?></h4>
@@ -65,7 +65,7 @@
                 <!-- we are making use of a form for the delete system  -->
                 <form action="details.php" method='POST'>
                     <input type="hidden" name='idToDelete' value="<?php echo $pizza['id'] ?>">
-                    <input type="submit" name='delete' value = 'Delete' class='btn brand z-depth-0'>
+                    <input type="submit" name='delete' value = 'Delete' class='btn brand z-depth-0'> 
                 </form>
 
     

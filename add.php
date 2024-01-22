@@ -102,6 +102,7 @@
 
     <section class="container grey-text">
         <h4 class="center">Add pizza</h4>
+        <!-- <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method='POST' class="white">  there are some times u can use in the action atribute u can use php built in superglobols in this case even when u change the page name manually the superglobal will retain the name of the new page its work is to get the name of that page at any given time -->
         <form action="add.php" method='POST' class="white">
             <label for="">Your Email:</label>
             <input type="text" name='email' value='<?php echo  htmlspecialchars($email); ?>'>
