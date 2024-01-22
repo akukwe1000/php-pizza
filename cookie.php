@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
 
     // before we asses any session we have to start it first 
     session_start();
-    $_SESSION['name'] = $_POST['name'];
+    $_SESSION['name'] = $_POST['name']; 
     // echo $_SESSION['name'];
     header('location:index.php');
 }
